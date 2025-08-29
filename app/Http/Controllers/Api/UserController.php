@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct(private UserService $userService)
+    {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::all();
-
-        return response()->json(['data' => $users]);
+        return response()->json(['data' => $this->userService->index()]);
     }
 
     /**
@@ -29,9 +32,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        return response()->json(['data' => $this->userService->store($request->validated())]);
     }
 
     /**
