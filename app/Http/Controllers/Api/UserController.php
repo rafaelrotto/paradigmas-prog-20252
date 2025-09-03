@@ -16,9 +16,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(['data' => $this->userService->index()]);
+        return response()->json(['data' => $this->userService->index($request->all())]);
     }
 
     /**
@@ -66,6 +66,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->userService->destoy($id);
     }
 }

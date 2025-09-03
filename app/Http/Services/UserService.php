@@ -2,21 +2,26 @@
 
 namespace App\Http\Services;
 
+use App\Http\Repositories\UserRepository;
 use App\Models\User;
 
 class UserService
 {
-    public function index()
+    public function __construct(private UserRepository $userRepository)
+    {}
+
+    public function index(array $data)
     {
-        return User::all();
+        return $this->userRepository->index($data);
     }
 
     public function store(array $data)
     {
-       return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => bcrypt($data['password'])
-       ]);
+       return $this->userRepository->store($data);
+    }
+
+    public function destroy(string $id)
+    {
+        $this->userRepository->destroy($id);
     }
 }
