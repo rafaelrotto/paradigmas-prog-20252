@@ -66,6 +66,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->userService->destoy($id);
+        $this->userService->destroy($id);
     }
 }
