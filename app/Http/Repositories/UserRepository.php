@@ -35,6 +35,15 @@ class UserRepository
         return $this->model->findOrFail($id);
     }
 
+    public function update(array $data, string $id)
+    {
+        $user = $this->show($id);
+
+        $user->update($data);
+
+        return $user->fresh();
+    }
+
     public function destroy(string $id)
     {
         $this->show($id)->delete();

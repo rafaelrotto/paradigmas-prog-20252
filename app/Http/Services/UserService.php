@@ -20,6 +20,16 @@ class UserService
        return $this->userRepository->store($data);
     }
 
+    public function show(string $id)
+    {
+        return $this->userRepository->show($id);
+    }
+
+    public function update (array $data, string $id)
+    {
+        return $this->userRepository->update($data, $id);
+    }
+
     public function destroy(string $id)
     {
         $this->userRepository->destroy($id);
