@@ -2,9 +2,10 @@
 
 namespace App\Http\Repositories;
 
+use App\Interfaces\Repository;
 use App\Models\User;
 
-class UserRepository
+class UserRepository implements Repository
 {
     public function __construct(private User $model) {}
 
