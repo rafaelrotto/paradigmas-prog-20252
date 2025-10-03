@@ -6,7 +6,7 @@ use App\Http\Repositories\UserRepository;
 use App\Interfaces\Service;
 use App\Models\User;
 
-class UserService implements Service
+class UserService
 {
     public function __construct(private UserRepository $userRepository)
     {}
@@ -14,25 +14,5 @@ class UserService implements Service
     public function index(array $data)
     {
         return $this->userRepository->index($data);
-    }
-
-    public function store(array $data)
-    {
-       return $this->userRepository->store($data);
-    }
-
-    public function show(string $id)
-    {
-        return $this->userRepository->show($id);
-    }
-
-    public function update (array $data, string $id)
-    {
-        return $this->userRepository->update($data, $id);
-    }
-
-    public function destroy(string $id)
-    {
-        $this->userRepository->destroy($id);
     }
 }
