@@ -4,9 +4,12 @@ namespace App\Http\Repositories;
 
 use App\Models\Company;
 
-class CompanyRepository
+class CompanyRepository extends BaseRepository
 {
-    public function __construct(private Company $model) {}
+    public function __construct(Company $model) 
+    {
+        parent::__construct($model);
+    }
 
     public function index(array $data)
     {
