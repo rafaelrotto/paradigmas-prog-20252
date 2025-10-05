@@ -5,21 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Services\BaseService;
 use App\Http\Services\UserService;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private UserService $userService;
 
-    private BaseService $baseService;
-
-    public function __construct(UserService $userService, BaseService $baseService)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->baseService = $baseService(new User());
     }
 
     /**
@@ -37,7 +32,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-        return response()->json(['data' => $this->baseService->store([
+        return response()->json(['data' => $this->userService->store([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password'])
@@ -49,7 +44,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(['data' => $this->baseService->show($id)]);
+        return response()->json(['data' => $this->userService->show($id)]);
     }
 
     /**
@@ -57,7 +52,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        return response()->json(['data' => $this->baseService->update($request->validated(), $id)]);
+        return response()->json(['data' => $this->userService->update($request->validated(), $id)]);
     }
 
     /**
@@ -65,6 +60,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->baseService->destroy($id);
+        $this->userService->destroy($id);
     }
 }

@@ -5,9 +5,9 @@ namespace App\Http\Repositories;
 use App\Interfaces\Repository;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository implements Repository
+abstract class BaseRepository implements Repository
 {
-    private Model $model;
+    protected Model $model;
 
     public function __construct(Model $model)
     {
