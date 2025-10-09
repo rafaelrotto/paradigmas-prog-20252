@@ -3,13 +3,16 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\UserRepository;
-use App\Interfaces\Service;
-use App\Models\User;
 
-class UserService
+class UserService extends BaseService
 {
-    public function __construct(private UserRepository $userRepository)
-    {}
+    protected UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        parent::__construct($userRepository);
+        $this->userRepository = $userRepository;
+    }
 
     public function index(array $data)
     {
