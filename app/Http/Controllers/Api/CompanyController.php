@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Http\Resources\CompanyResource;
 use App\Http\Services\CompanyService;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        return response()->json(['data' => $this->companyService->index($request->all())]);
+        return CompanyResource::collection($this->companyService->index($request->all()));
     }
 
     /**
@@ -30,7 +31,7 @@ class CompanyController extends Controller
      */
     public function store(CreateCompanyRequest $request)
     {
-        return response()->json(['data' => $this->companyService->store($request->validated())]);
+        return new CompanyResource($this->companyService->store($request->validated()));
     }
 
     /**
@@ -38,7 +39,7 @@ class CompanyController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(['data' => $this->companyService->show($id)]);
+        return new CompanyResource($this->companyService->show($id));
     }
 
     /**
@@ -46,7 +47,7 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, string $id)
     {
-        return response()->json(['data' => $this->companyService->update($request->validated(), $id)]);
+        return new CompanyResource($this->companyService->update($request->validated(), $id));
     }
 
     /**
