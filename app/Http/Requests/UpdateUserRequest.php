@@ -32,6 +32,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'password' => 'sometimes|min:6|max:20|string',
             'password_confirmation' => 'required_with:password|same:password',
+            'type' => 'sometimes|in:admin,manager'
         ];
     }
 }
