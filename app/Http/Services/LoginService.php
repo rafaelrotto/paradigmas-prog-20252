@@ -23,4 +23,15 @@ class LoginService
             'token' => $user->createToken('auth_token')->plainTextToken
         ];
     }
+
+    public function logout()
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            abort(404, 'Não foi possível fazer o logout.');
+        }
+
+        $user->tokens()->delete();
+    }
 }

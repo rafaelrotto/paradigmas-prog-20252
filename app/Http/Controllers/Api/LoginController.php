@@ -15,4 +15,11 @@ class LoginController extends Controller
     {
         return response()->json(['data' => $this->loginService->login($request->validated())]);
     }
+
+    public function logout()
+    {
+        $this->loginService->logout();
+
+        return response()->json(['message' => 'Logout realizado com sucesso.']);
+    }
 }

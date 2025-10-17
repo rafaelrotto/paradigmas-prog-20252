@@ -16,7 +16,8 @@ class UsersTableSeeder extends Seeder
         $user = [
             'name' => 'admin',
             'email' => 'admin@mail.com',
-            'password' => bcrypt('123456')
+            'password' => bcrypt('123456'),
+            'type' => 'admin'
         ];
 
         $this->create($user);
@@ -30,7 +31,18 @@ class UsersTableSeeder extends Seeder
             'name' => 'manager',
             'email' => 'manager@mail.com',
             'password' => bcrypt('123456'),
-            'company_id' => $company->id
+            'company_id' => $company->id,
+            'type' => 'manager'
+        ];
+
+        $this->create($user);
+
+        $user = [
+            'name' => 'user',
+            'email' => 'user@mail.com',
+            'password' => bcrypt('123456'),
+            'company_id' => $company->id,
+            'type' => 'user'
         ];
 
         $this->create($user);

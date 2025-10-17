@@ -15,7 +15,14 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::middleware(['auth:sanctum', 'user.type:manager'])->group(function () {
-    Route::apiResource('/users', UserController::class);
-    Route::apiResource('/companies', CompanyController::class);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::middleware(['user.type:manager,admin'])->group(function () {
+        Route::apiResource('/users', UserController::class);
+        Route::apiResource('/companies', CompanyController::class);
+    });
+
+    Route::middleware(['user.type:user'])->group(function() {
+        Route::apiResource('/users', UserController::class)->only('show', 'update');
+    });
 });
